@@ -22,4 +22,6 @@ public class Account {
     private String accountName;
     private BigDecimal balance;
     private String currency;
+
+
 }
