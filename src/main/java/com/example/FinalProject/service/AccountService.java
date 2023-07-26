@@ -19,7 +19,17 @@ public class AccountService {
     }
 
     public Account save(Account account) {
-        return accountRepository.save(account);
+        Account savedAccount = toAccount(account);
+        return accountRepository.save(savedAccount);
+    }
+
+    private Account toAccount(Account account) {
+        return Account.builder()
+                .id(account.getId())
+                .balance(account.getBalance())
+                .accountName(account.getAccountName())
+                .currency(account.getCurrency())
+                .build();
     }
 
 }

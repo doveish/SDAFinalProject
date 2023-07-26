@@ -32,7 +32,8 @@ public class TradeController {
     }
 
     @PostMapping("/add-trade")
-    public Trade addTrade(Trade trade) {
-        return tradeService.save(trade);
+    public ResponseEntity<Trade> addTrade(@RequestBody Trade trade) {
+        tradeService.save(trade);
+        return ResponseEntity.ok(trade);
     }
 }

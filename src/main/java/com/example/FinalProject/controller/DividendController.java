@@ -3,12 +3,11 @@ package com.example.FinalProject.controller;
 import com.example.FinalProject.model.Account;
 import com.example.FinalProject.model.Dividend;
 import com.example.FinalProject.model.Trade;
+import com.example.FinalProject.service.AccountService;
 import com.example.FinalProject.service.DividendService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +17,7 @@ public class DividendController {
 
     @Autowired
     private DividendService dividendService;
+    private AccountService accountService;
 
     @GetMapping
     public List<Dividend> getFullDividendList() {
@@ -25,8 +25,9 @@ public class DividendController {
     }
 
     @PostMapping("/add-dividend")
-    public Dividend addDividend(Dividend dividend) {
-        return dividendService.save(dividend);
+    public ResponseEntity<Dividend> addDividend(@RequestBody Dividend dividend) {
+        dividendService.save(dividend);
+        return ResponseEntity.ok(dividend);
     }
 
 }

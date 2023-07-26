@@ -1,24 +1,36 @@
 package com.example.FinalProject.service;
 
+import com.example.FinalProject.model.Account;
 import com.example.FinalProject.model.Dividend;
 import com.example.FinalProject.repository.DividendRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class DividendService {
-    private final DividendRepository dividendRepository;
 
-    public DividendService(DividendRepository dividendRepository) {
-        this.dividendRepository = dividendRepository;
-    }
+    @Autowired
+    private DividendRepository dividendRepository;
 
     public List<Dividend> getFullDividendList() {
         return dividendRepository.findAll();
     }
 
     public Dividend save (Dividend dividend) {
-        return dividendRepository.save(dividend);
+        Dividend savedDividend = toDividend(dividend);
+        return dividendRepository.save(savedDividend);
+    }
+
+    private Dividend toDividend(Dividend dividend) {
+        return Dividend.builder()
+                .id(dividend.getId())
+                .date(dividend.getDate())
+                .stock(dividend.getStock())
+                .grossAmount(dividend.getGrossAmount())
+                .withholdingTax(dividend.getWithholdingTax())
+                .netAmount(dividend.getNetAmount())
+                .build();
     }
 }

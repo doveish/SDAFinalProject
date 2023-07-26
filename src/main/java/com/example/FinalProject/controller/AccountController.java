@@ -4,10 +4,7 @@ import com.example.FinalProject.model.Account;
 import com.example.FinalProject.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +21,8 @@ public class AccountController {
     }
 
     @PostMapping("/add-account")
-    public Account addAccount(Account account) {
-        return accountService.save(account);
+    public ResponseEntity<Account> addAccount(@RequestBody Account account) {
+        accountService.save(account);
+        return ResponseEntity.ok(account);
     }
 }

@@ -4,6 +4,7 @@ import com.example.FinalProject.model.Account;
 import com.example.FinalProject.model.Dividend;
 import com.example.FinalProject.model.Stock;
 import com.example.FinalProject.service.StockService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +30,9 @@ public class StockController {
     }
 
     @PostMapping("/add-stock")
-    public Stock addStock(Stock stock) {
-        return stockService.save(stock);
+    public ResponseEntity<Stock> addStock(@RequestBody Stock stock) {
+        stockService.save(stock);
+        return ResponseEntity.ok(stock);
     }
 
 }

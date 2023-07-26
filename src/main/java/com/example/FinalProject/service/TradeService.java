@@ -21,7 +21,22 @@ public class TradeService {
     }
 
     public Trade save(Trade trade) {
+        Trade savedTrade = toTrade(trade);
         return tradeRepository.save(trade);
+    }
+
+    private Trade toTrade(Trade trade) {
+        return Trade.builder()
+                .id(trade.getId())
+                .tradeType(trade.getTradeType())
+                .stock(trade.getStock())
+                .date(trade.getDate())
+                .amount(trade.getAmount())
+                .unitPrice(trade.getUnitPrice())
+                .commission(trade.getCommission())
+                .tradeSum(trade.getTradeSum())
+                .comment(trade.getComment())
+                .build();
     }
 
     public List<Trade> getTradeListByStockSymbol(String symbol) {
