@@ -28,6 +28,7 @@ public class DividendService {
                 .id(dividend.getId())
                 .date(dividend.getDate())
                 .stock(dividend.getStock())
+                .account(dividend.getAccount())
                 .grossAmount(dividend.getGrossAmount())
                 .withholdingTax(dividend.getWithholdingTax())
                 .netAmount(dividend.getNetAmount())

@@ -1,9 +1,13 @@
 package com.example.FinalProject.service;
 
 import com.example.FinalProject.model.Account;
+import com.example.FinalProject.model.Dividend;
+import com.example.FinalProject.model.enums.TradeType;
+import com.example.FinalProject.model.enums.TransactionType;
 import com.example.FinalProject.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -31,5 +35,12 @@ public class AccountService {
                 .currency(account.getCurrency())
                 .build();
     }
+
+//    private Account updateAccountBalanceByReceivedDividend(Account account, Dividend dividend) {
+//        BigDecimal total;
+//        total = account.getBalance().add(dividend.getNetAmount());
+//        account.setBalance(total);
+//        return accountRepository.save(account);
+//    }
 
 }

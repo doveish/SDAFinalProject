@@ -20,13 +20,16 @@ public class Dividend {
     private LocalDate date;
     @ManyToOne
     private Stock stock;
+    @ManyToOne
+    private Account account;
     private BigDecimal grossAmount;
     private BigDecimal withholdingTax;
     private BigDecimal netAmount;
 
-    public Dividend(LocalDate date, Stock stock, BigDecimal grossAmount, BigDecimal withholdingTax, BigDecimal netAmount) {
+    public Dividend(LocalDate date, Stock stock, Account account, BigDecimal grossAmount, BigDecimal withholdingTax, BigDecimal netAmount) {
         this.date = date;
         this.stock = stock;
+        this.account = account;
         this.grossAmount = grossAmount;
         this.withholdingTax = withholdingTax;
         this.netAmount = netAmount;
