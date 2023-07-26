@@ -22,4 +22,10 @@ public class Account {
     private String accountName;
     private BigDecimal balance;
     private String currency;
+
+    public Account(String accountName, BigDecimal balance, String currency) {
+        this.accountName = accountName;
+        this.balance = balance;
+        this.currency = currency;
+    }
 }

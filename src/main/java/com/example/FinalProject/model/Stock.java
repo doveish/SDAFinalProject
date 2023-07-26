@@ -25,4 +25,15 @@ public class Stock {
     private BigDecimal averagePrice;
     private BigDecimal currentValue;
     private BigDecimal profitLoss;
+
+    public Stock(String symbol, String stockName, Account account, BigDecimal currentPrice, BigDecimal totalAmount, BigDecimal averagePrice, BigDecimal currentValue, BigDecimal profitLoss) {
+        this.symbol = symbol;
+        this.stockName = stockName;
+        this.account = account;
+        this.currentPrice = currentPrice;
+        this.totalAmount = totalAmount;
+        this.averagePrice = averagePrice;
+        this.currentValue = currentValue;
+        this.profitLoss = profitLoss;
+    }
 }

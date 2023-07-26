@@ -24,7 +24,7 @@ public class StockService {
     }
 
     public Stock getStockByStockSymbol(String symbol) {
-        Stock stock = stockRepository.findStockByStockSymbol(symbol);
+        Stock stock = stockRepository.findStockBySymbol(symbol);
         return stock;
     }
 }

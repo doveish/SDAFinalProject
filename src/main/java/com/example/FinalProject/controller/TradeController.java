@@ -1,5 +1,6 @@
 package com.example.FinalProject.controller;
 
+import com.example.FinalProject.model.Dividend;
 import com.example.FinalProject.model.Stock;
 import com.example.FinalProject.model.Trade;
 import com.example.FinalProject.service.StockService;
@@ -30,5 +31,8 @@ public class TradeController {
         return tradeList;
     }
 
-
+    @PostMapping("/add-trade")
+    public Trade addTrade(Trade trade) {
+        return tradeService.save(trade);
+    }
 }
