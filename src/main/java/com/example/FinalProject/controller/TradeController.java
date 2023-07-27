@@ -17,6 +17,7 @@ public class TradeController {
 
     @Autowired
     private TradeService tradeService;
+    @Autowired
     private StockService stockService;
 
     @GetMapping
@@ -25,10 +26,10 @@ public class TradeController {
     }
 
     @GetMapping(path = "/{symbol}")
-    public List<Trade> getTradeListByStockSymbol(@PathVariable("symbol") String symbol) {
+    public ResponseEntity<List<Trade>> getTradeListByStockSymbol(@PathVariable("symbol") String symbol) {
         Stock stock = stockService.getStockByStockSymbol(symbol);
         List<Trade> tradeList = tradeService.getTradeListByStockSymbol(stock.getSymbol());
-        return tradeList;
+        return ResponseEntity.ok(tradeList);
     }
 
     @PostMapping("/add-trade")

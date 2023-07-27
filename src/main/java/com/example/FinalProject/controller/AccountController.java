@@ -22,6 +22,12 @@ public class AccountController {
         return accountService.getAllAccounts();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Account> getAccountById(@PathVariable("id") Long id) {
+        Account account = accountService.getAccountById(id);
+        return ResponseEntity.ok(account);
+    }
+
     @PostMapping("/add-account")
     public ResponseEntity<Account> addAccount(@RequestBody Account account) {
         accountService.save(account);

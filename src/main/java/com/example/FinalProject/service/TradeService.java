@@ -42,9 +42,7 @@ public class TradeService {
     }
 
     public List<Trade> getTradeListByStockSymbol(String symbol) {
-        Trade trade = tradeRepository.findTradeByStockSymbol(symbol);
-        List<Trade> tradeList = new ArrayList<>();
-        tradeList.add(trade);
+        List<Trade> tradeList = tradeRepository.findTradeByStockSymbol(symbol);
         return tradeList;
     }
 }

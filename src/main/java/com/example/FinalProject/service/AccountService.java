@@ -25,6 +25,10 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
+    public Account getAccountById(Long id) {
+        return accountRepository.findById(id).orElse(null);
+    }
+
     public Account save(Account account) {
         Account savedAccount = toAccount(account);
         return accountRepository.save(savedAccount);
@@ -63,6 +67,8 @@ public class AccountService {
         if (transaction.getTransactionType().equalsIgnoreCase("DEPOSIT")) {
             total = account.getBalance().add(transaction.getAmount());
             account.setBalance(total);
+            transactionRepository.save(transaction);
+            transaction.setTransactionType("DEPOSIT");
         } else {
             if (transaction.getAmount().compareTo(account.getBalance()) > 0) {
                 throw new IllegalStateException("Withdrawal amount exceeds account balance");
