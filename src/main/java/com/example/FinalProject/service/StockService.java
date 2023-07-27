@@ -3,6 +3,7 @@ package com.example.FinalProject.service;
 import com.example.FinalProject.model.Dividend;
 import com.example.FinalProject.model.Stock;
 import com.example.FinalProject.repository.StockRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,7 +11,8 @@ import java.util.List;
 
 @Service
 public class StockService {
-   private final StockRepository stockRepository;
+    @Autowired
+   private StockRepository stockRepository;
 
     public StockService(StockRepository stockRepository) {
         this.stockRepository = stockRepository;

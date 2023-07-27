@@ -22,10 +22,12 @@ public class Account {
     private String accountName;
     private BigDecimal balance;
     private String currency;
+    private Boolean status;
 
-    public Account(String accountName, BigDecimal balance, String currency) {
+    public Account(String accountName, BigDecimal balance, String currency, Boolean status) {
         this.accountName = accountName;
         this.balance = balance;
         this.currency = currency;
+        this.status = status;
     }
 }
