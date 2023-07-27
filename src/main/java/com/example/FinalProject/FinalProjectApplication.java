@@ -9,8 +9,7 @@ import com.example.FinalProject.repository.TradeRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.math.BigDecimal;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @SpringBootApplication
 public class FinalProjectApplication implements CommandLineRunner {
@@ -52,6 +51,7 @@ public class FinalProjectApplication implements CommandLineRunner {
         stockRepository.save(stock2);
 
         System.out.println(stockRepository.findAll());
+
 
 
     }

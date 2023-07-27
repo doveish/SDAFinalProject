@@ -1,12 +1,11 @@
 package com.example.FinalProject.service;
 
-import com.example.FinalProject.model.Dividend;
+import com.example.FinalProject.model.Account;
 import com.example.FinalProject.model.Stock;
 import com.example.FinalProject.repository.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +23,11 @@ public class StockService {
 
     public Stock save(Stock stock) {
         Stock savedStock = toStock(stock);
+        return stockRepository.save(stock);
+    }
+
+    public Stock save(Account account, Stock stock) {
+        stock.setAccount(account);
         return stockRepository.save(stock);
     }
 
