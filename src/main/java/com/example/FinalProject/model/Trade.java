@@ -4,6 +4,7 @@ import com.example.FinalProject.model.enums.TradeType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Trade {
+public class Trade implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

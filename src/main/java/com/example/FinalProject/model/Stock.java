@@ -3,6 +3,7 @@ package com.example.FinalProject.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Getter
@@ -12,7 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Stock {
+public class Stock implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

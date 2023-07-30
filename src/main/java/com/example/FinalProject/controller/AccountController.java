@@ -16,6 +16,9 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private StockService stockService;
+
     @GetMapping
     public List<Account> getAllAccounts() {
         return accountService.getAllAccounts();
@@ -23,8 +26,15 @@ public class AccountController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Account> getAccountById(@PathVariable("id") Long id) {
-        Account account = accountService.getAccountById(id);
+        Account account = accountService.findAccountById(id);
         return ResponseEntity.ok(account);
+    }
+
+    @PostMapping("/{id}/create-stock")
+    public ResponseEntity<Stock> createStock(@PathVariable("id") Long accountId, @RequestBody Stock stock) {
+        Account account = accountService.findAccountById(accountId);
+        Stock savedStock = stockService.save(account,stock);
+        return ResponseEntity.ok(savedStock);
     }
 
     @PostMapping("/add-account")

@@ -28,6 +28,10 @@ public class StockService {
         return stockRepository.findAll();
     }
 
+    public Stock findStockById(Long id) {
+        return stockRepository.findById(id).orElseThrow();
+    }
+
     public Stock save(Stock stock) {
         Stock savedStock = toStock(stock);
         return stockRepository.save(stock);
@@ -57,22 +61,24 @@ public class StockService {
         return stock;
     }
 
-    public Stock getAveragePriceForStockBySymbol(String symbol) {
-        Stock stock = stockRepository.findStockBySymbol(symbol);
-        List<Trade> tradeList = tradeRepository.findTradeByStockSymbol(symbol);
+    //WILL BE CALCULATED IN FRONT-END!
 
-        BigDecimal totalTradeSum = BigDecimal.ZERO;
-
-        for (Trade trade : tradeList) {
-            BigDecimal tradeSum = trade.getTradeSum();
-            totalTradeSum = totalTradeSum.add(tradeSum);
-        }
-
-        BigDecimal totalAmount = stock.getTotalAmount();
-        BigDecimal averageBuyPrice = totalTradeSum.divide(totalAmount, 2, RoundingMode.HALF_UP);
-        stock.setAveragePrice(averageBuyPrice);
-        return stock;
-    }
+//    public Stock getAveragePriceForStockBySymbol(String symbol) {
+//        Stock stock = stockRepository.findStockBySymbol(symbol);
+//        List<Trade> tradeList = tradeRepository.findTradeByStockSymbol(symbol);
+//
+//        BigDecimal totalTradeSum = BigDecimal.ZERO;
+//
+//        for (Trade trade : tradeList) {
+//            BigDecimal tradeSum = trade.getTradeSum();
+//            totalTradeSum = totalTradeSum.add(tradeSum);
+//        }
+//
+//        BigDecimal totalAmount = stock.getTotalAmount();
+//        BigDecimal averageBuyPrice = totalTradeSum.divide(totalAmount, 2, RoundingMode.HALF_UP);
+//        stock.setAveragePrice(averageBuyPrice);
+//        return stock;
+//    }
 
 
 }

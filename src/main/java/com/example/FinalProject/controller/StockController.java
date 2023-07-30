@@ -3,8 +3,11 @@ package com.example.FinalProject.controller;
 import com.example.FinalProject.model.Account;
 import com.example.FinalProject.model.Dividend;
 import com.example.FinalProject.model.Stock;
+import com.example.FinalProject.model.Trade;
 import com.example.FinalProject.service.AccountService;
+import com.example.FinalProject.service.DividendService;
 import com.example.FinalProject.service.StockService;
+import com.example.FinalProject.service.TradeService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,15 +26,26 @@ public class StockController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private TradeService tradeService;
+    @Autowired
+    private DividendService dividendService;
+
     @GetMapping
     public List<Stock> getFullPortfolio() {
         return stockService.getFullPortfolio();
     }
 
-    @GetMapping(path = "/{symbol}")
+    @GetMapping("/symbol/{symbol}")
     public Stock getStockByStockSymbol(@PathVariable("symbol") String symbol) {
         Stock stock = stockService.getStockByStockSymbol(symbol);
         return stock;
+    }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<Stock> getStockById(@PathVariable("id") Long id) {
+        Stock stock = stockService.findStockById(id);
+        return ResponseEntity.ok(stock);
     }
 
     @PostMapping("/add-stock")
@@ -40,16 +54,19 @@ public class StockController {
         return ResponseEntity.ok(stock);
     }
 
-    @PostMapping("/{id}/create")
-    public ResponseEntity<Stock> createStock(@PathVariable("id") Long accountId, @RequestBody Stock stock) {
-        Account account = accountService.getAccountById(accountId);
-        Stock savedStock = stockService.save(account,stock);
-        return ResponseEntity.ok(savedStock);
+    @PostMapping("/{id}/createTrade")
+    public ResponseEntity<Trade> createTrade(@PathVariable("id") Long stockId, @RequestBody Trade trade) {
+        Stock stock = stockService.findStockById(stockId);
+        Trade savedTrade = tradeService.save(stock, trade);
+        return ResponseEntity.ok(savedTrade);
     }
 
-    @PatchMapping("/{symbol}/average-price")
-    public ResponseEntity<Stock> getAveragePriceByStockSymbol(@PathVariable("symbol") String symbol, @RequestBody Stock stock) {
-        return ResponseEntity.accepted().body(stockService.getAveragePriceForStockBySymbol(symbol));
+    @PostMapping("/{id}/createDividend")
+    public ResponseEntity<Dividend> createDividend(@PathVariable("id") Long stockId, @RequestBody Dividend dividend) {
+        Stock stock = stockService.findStockById(stockId);
+        Dividend savedDividend = dividendService.save(dividend, stock);
+        return ResponseEntity.ok(savedDividend);
     }
+
 
 }

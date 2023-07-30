@@ -8,6 +8,7 @@ import com.example.FinalProject.model.enums.TradeType;
 import com.example.FinalProject.repository.AccountRepository;
 import com.example.FinalProject.repository.StockRepository;
 import com.example.FinalProject.repository.TradeRepository;
+import jakarta.persistence.ManyToOne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class TradeService {
@@ -35,6 +37,11 @@ public class TradeService {
 
     public Trade save(Trade trade) {
         Trade savedTrade = toTrade(trade);
+        return tradeRepository.save(trade);
+    }
+
+    public Trade save(Stock stock, Trade trade) {
+        trade.setStock(stock);
         return tradeRepository.save(trade);
     }
 
@@ -64,27 +71,31 @@ public class TradeService {
 
         if (trade.getTradeType().equalsIgnoreCase("BUY")) {
             totalStockAmount = trade.getAmount().add(stock.getTotalAmount());
-            trade.setTradeType("BUY");
-
         } else {
             if (trade.getTradeType().equalsIgnoreCase("SELL") && trade.getAmount().compareTo(stock.getTotalAmount()) > 0) {
                 throw new IllegalStateException("Quantity of transaction exceeds available stock amount");
             }
-            trade.setTradeType("SELL");
             totalStockAmount = stock.getTotalAmount().subtract(trade.getAmount());
         }
 
-        trade.setAmount(trade.getAmount());
-        trade.setStock(stock);
-        trade.setDate(LocalDate.now());
-        trade.setUnitPrice(trade.getUnitPrice());
-        trade.setCommission(trade.getCommission());
-        trade.setComment(trade.getComment());
-        trade.setTradeSum(trade.getTradeSum());
+        Trade newTrade = new Trade();
+        newTrade.setTradeType(trade.getTradeType());
+        newTrade.setAmount(trade.getAmount());
+        newTrade.setStock(stock);
+        newTrade.setDate(LocalDate.now());
+        newTrade.setUnitPrice(trade.getUnitPrice());
+        newTrade.setCommission(trade.getCommission());
+        newTrade.setComment(trade.getComment());
+        newTrade.setTradeSum(trade.getTradeSum());
+
+        BigDecimal averagePrice = (trade.getUnitPrice().multiply(trade.getAmount())).divide(trade.getAmount());
 
         stock.setTotalAmount(totalStockAmount);
         stock.setAccount(account);
-        stockRepository.save(stock);
+
+        stock.setAveragePrice(averagePrice);
+        stock.setCurrentPrice(trade.getUnitPrice());//
+        stock.setCurrentValue(totalStockAmount.multiply(trade.getUnitPrice()));//UnitPrice should come from an external API
 
         return trade;
     }

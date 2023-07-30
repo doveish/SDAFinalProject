@@ -1,7 +1,7 @@
 package com.example.FinalProject;
 
-import com.example.FinalProject.model.Account;
 import com.example.FinalProject.model.Stock;
+import com.example.FinalProject.model.Trade;
 import com.example.FinalProject.repository.AccountRepository;
 import com.example.FinalProject.repository.DividendRepository;
 import com.example.FinalProject.repository.StockRepository;
@@ -9,7 +9,9 @@ import com.example.FinalProject.repository.TradeRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.reactive.function.client.WebClient;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @SpringBootApplication
 public class FinalProjectApplication implements CommandLineRunner {
