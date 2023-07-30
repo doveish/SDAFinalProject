@@ -7,6 +7,7 @@ import com.example.FinalProject.service.AccountService;
 import com.example.FinalProject.service.StockService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,11 +40,16 @@ public class StockController {
         return ResponseEntity.ok(stock);
     }
 
-    @PostMapping("/{id}/stock")
+    @PostMapping("/{id}/create")
     public ResponseEntity<Stock> createStock(@PathVariable("id") Long accountId, @RequestBody Stock stock) {
         Account account = accountService.getAccountById(accountId);
         Stock savedStock = stockService.save(account,stock);
         return ResponseEntity.ok(savedStock);
+    }
+
+    @PatchMapping("/{symbol}/average-price")
+    public ResponseEntity<Stock> getAveragePriceByStockSymbol(@PathVariable("symbol") String symbol, @RequestBody Stock stock) {
+        return ResponseEntity.accepted().body(stockService.getAveragePriceForStockBySymbol(symbol));
     }
 
 }

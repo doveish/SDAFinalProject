@@ -18,7 +18,7 @@ public class Trade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private TradeType tradeType;
+    private String tradeType;
     @ManyToOne
     private Stock stock;
     private LocalDate date;
@@ -28,7 +28,7 @@ public class Trade {
     private BigDecimal tradeSum;
     private String comment;
 
-    public Trade(TradeType tradeType, Stock stock, LocalDate date, BigDecimal amount, BigDecimal unitPrice, BigDecimal commission, BigDecimal tradeSum, String comment) {
+    public Trade(String tradeType, Stock stock, LocalDate date, BigDecimal amount, BigDecimal unitPrice, BigDecimal commission, BigDecimal tradeSum, String comment) {
         this.tradeType = tradeType;
         this.stock = stock;
         this.date = date;

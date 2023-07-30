@@ -1,9 +1,8 @@
 package com.example.FinalProject.controller;
 
-import com.example.FinalProject.model.Account;
-import com.example.FinalProject.model.Dividend;
-import com.example.FinalProject.model.Transaction;
+import com.example.FinalProject.model.*;
 import com.example.FinalProject.service.AccountService;
+import com.example.FinalProject.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +49,4 @@ public class AccountController {
                                                                           @RequestBody Transaction transaction) {
         return ResponseEntity.accepted().body(accountService.updateAccountBalanceByTransactionType(id, transaction));
     }
-
-
-
 }

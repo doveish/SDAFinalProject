@@ -1,16 +1,16 @@
 package com.example.FinalProject.service;
 
-import com.example.FinalProject.model.Account;
-import com.example.FinalProject.model.Dividend;
-import com.example.FinalProject.model.Transaction;
+import com.example.FinalProject.model.*;
 import com.example.FinalProject.model.enums.TradeType;
 import com.example.FinalProject.model.enums.TransactionType;
 import com.example.FinalProject.repository.AccountRepository;
+import com.example.FinalProject.repository.StockRepository;
 import com.example.FinalProject.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -20,6 +20,8 @@ public class AccountService {
     private AccountRepository accountRepository;
     @Autowired
     private TransactionRepository transactionRepository;
+    @Autowired
+    private StockRepository stockRepository;
 
     public List<Account> getAllAccounts() {
         return accountRepository.findAll();
@@ -67,7 +69,6 @@ public class AccountService {
         if (transaction.getTransactionType().equalsIgnoreCase("DEPOSIT")) {
             total = account.getBalance().add(transaction.getAmount());
             account.setBalance(total);
-            transactionRepository.save(transaction);
             transaction.setTransactionType("DEPOSIT");
         } else {
             if (transaction.getAmount().compareTo(account.getBalance()) > 0) {
@@ -75,10 +76,10 @@ public class AccountService {
             }
             total = account.getBalance().subtract(transaction.getAmount());
             account.setBalance(total);
-            transactionRepository.save(transaction);
             transaction.setTransactionType("WITHDRAW");
         }
+        transaction.setTransactionDate(LocalDate.now());
+        transactionRepository.save(transaction);
         return account;
     }
-
 }

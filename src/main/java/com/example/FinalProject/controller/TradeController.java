@@ -1,8 +1,10 @@
 package com.example.FinalProject.controller;
 
+import com.example.FinalProject.model.Account;
 import com.example.FinalProject.model.Dividend;
 import com.example.FinalProject.model.Stock;
 import com.example.FinalProject.model.Trade;
+import com.example.FinalProject.service.AccountService;
 import com.example.FinalProject.service.StockService;
 import com.example.FinalProject.service.TradeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ public class TradeController {
     private TradeService tradeService;
     @Autowired
     private StockService stockService;
+    @Autowired
+    private AccountService accountService;
 
     @GetMapping
     public List<Trade> getFullTradeList() {
@@ -36,5 +40,14 @@ public class TradeController {
     public ResponseEntity<Trade> addTrade(@RequestBody Trade trade) {
         tradeService.save(trade);
         return ResponseEntity.ok(trade);
+    }
+
+    @PostMapping("/{id}/update-stock-balance-by-trade/{symbol}")
+    public ResponseEntity<Trade> updateStockBalanceByTradeType(@PathVariable("id") Long id,
+                                                               @PathVariable("symbol") String stockSymbol,
+                                                               @RequestBody Trade trade) {
+        Trade savedTrade = tradeService.updateStockBalanceByTradeType(id, stockSymbol, trade);
+        tradeService.save(savedTrade);
+        return ResponseEntity.ok(savedTrade);
     }
 }

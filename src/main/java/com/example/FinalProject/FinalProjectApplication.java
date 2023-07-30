@@ -35,24 +35,5 @@ public class FinalProjectApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-
-        Account account1 = new Account();
-        Account account2 = new Account();
-
-        System.out.println("List of all accounts: " + accountRepository.findAll());
-        accountRepository.save(account1);
-        accountRepository.save(account2);
-        System.out.println("List of all accounts: " + accountRepository.findAll());
-
-        Stock stock1 = new Stock();
-        Stock stock2 = new Stock();
-
-        stockRepository.save(stock1);
-        stockRepository.save(stock2);
-
-        System.out.println(stockRepository.findAll());
-
-
-
     }
 }
