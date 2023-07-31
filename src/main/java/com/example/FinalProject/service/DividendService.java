@@ -39,4 +39,8 @@ public class DividendService {
                 .netAmount(dividend.getNetAmount())
                 .build();
     }
+
+    public List<Dividend> getDividendListByStockId(Long id) {
+        return dividendRepository.findAllByStockId(id);
+    }
 }

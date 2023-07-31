@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface TradeRepository extends JpaRepository<Trade, Long> {
     List<Trade> findTradeByStockSymbol(String symbol);
+
+    List<Trade> findAllByStockId(Long id);
 }

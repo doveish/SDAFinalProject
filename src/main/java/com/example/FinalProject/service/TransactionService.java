@@ -1,7 +1,9 @@
 package com.example.FinalProject.service;
 
+import com.example.FinalProject.model.Account;
 import com.example.FinalProject.model.Stock;
 import com.example.FinalProject.model.Transaction;
+import com.example.FinalProject.repository.AccountRepository;
 import com.example.FinalProject.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,15 @@ public class TransactionService {
 
     @Autowired
     private TransactionRepository transactionRepository;
+    @Autowired
+    private AccountRepository accountRepository;
 
     public List<Transaction> getFullTransactionList() {
         return transactionRepository.findAll();
+    }
+
+    public List<Transaction> getTransactionsListByAccountId(Long accountId) {
+        return transactionRepository.findAllByAccountId(accountId);
     }
 
     public Transaction save(Transaction transaction) {

@@ -88,15 +88,16 @@ public class TradeService {
         newTrade.setComment(trade.getComment());
         newTrade.setTradeSum(trade.getTradeSum());
 
-        BigDecimal averagePrice = (trade.getUnitPrice().multiply(trade.getAmount())).divide(trade.getAmount());
 
         stock.setTotalAmount(totalStockAmount);
         stock.setAccount(account);
-
-        stock.setAveragePrice(averagePrice);
         stock.setCurrentPrice(trade.getUnitPrice());//
         stock.setCurrentValue(totalStockAmount.multiply(trade.getUnitPrice()));//UnitPrice should come from an external API
 
         return trade;
+    }
+
+    public List<Trade> getTradeListByStockId(Long id) {
+        return tradeRepository.findAllByStockId(id);
     }
 }

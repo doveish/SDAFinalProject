@@ -78,7 +78,9 @@ public class AccountService {
             account.setBalance(total);
             transaction.setTransactionType("WITHDRAW");
         }
+        transaction.setAmount(transaction.getAmount());
         transaction.setTransactionDate(LocalDate.now());
+        transaction.setAccount(account);
         transactionRepository.save(transaction);
         return account;
     }

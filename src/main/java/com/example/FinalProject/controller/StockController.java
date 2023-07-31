@@ -48,6 +48,18 @@ public class StockController {
         return ResponseEntity.ok(stock);
     }
 
+    @GetMapping("/{id}/trade-list")
+    public ResponseEntity<List<Trade>> getTradeListByStockId(@PathVariable("id") Long id) {
+        List<Trade> tradeListByStockId = tradeService.getTradeListByStockId(id);
+        return ResponseEntity.ok(tradeListByStockId);
+    }
+
+    @GetMapping("/{id}/dividend-list")
+    public ResponseEntity<List<Dividend>> getDividendListByStockId(@PathVariable("id") Long id) {
+        List<Dividend> dividendListByStockId = dividendService.getDividendListByStockId(id);
+        return ResponseEntity.ok(dividendListByStockId);
+    }
+
     @PostMapping("/add-stock")
     public ResponseEntity<Stock> addStock(@RequestBody Stock stock) {
         stockService.save(stock);

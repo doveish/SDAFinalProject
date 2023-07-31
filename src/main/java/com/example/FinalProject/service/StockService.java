@@ -61,6 +61,10 @@ public class StockService {
         return stock;
     }
 
+    public List<Stock> getStocksListByAccountId(Long id) {
+        return stockRepository.findAllByAccountId(id);
+    }
+
     //WILL BE CALCULATED IN FRONT-END!
 
 //    public Stock getAveragePriceForStockBySymbol(String symbol) {
