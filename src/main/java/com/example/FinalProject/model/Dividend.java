@@ -3,6 +3,7 @@ package com.example.FinalProject.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -13,15 +14,22 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Dividend {
+public class Dividend implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long dividendId;
+    private Long id;
     private LocalDate date;
     @ManyToOne
-    @JoinColumn(name = "stock_stock_id")
     private Stock stock;
     private BigDecimal grossAmount;
     private BigDecimal withholdingTax;
     private BigDecimal netAmount;
+
+    public Dividend(LocalDate date, Stock stock, Account account, BigDecimal grossAmount, BigDecimal withholdingTax, BigDecimal netAmount) {
+        this.date = date;
+        this.stock = stock;
+        this.grossAmount = grossAmount;
+        this.withholdingTax = withholdingTax;
+        this.netAmount = netAmount;
+    }
 }
