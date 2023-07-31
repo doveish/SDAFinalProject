@@ -66,12 +66,22 @@ public class StockController {
         return ResponseEntity.ok(stock);
     }
 
+//    @PostMapping("/{id}/createTrade")
+//    public ResponseEntity<Trade> createTrade(@PathVariable("id") Long stockId, @RequestBody Trade trade) {
+//        Stock stock = stockService.findStockById(stockId);
+//        Trade savedTrade = tradeService.save(stock, trade);
+//        return ResponseEntity.ok(savedTrade);
+//    }
+
     @PostMapping("/{id}/createTrade")
-    public ResponseEntity<Trade> createTrade(@PathVariable("id") Long stockId, @RequestBody Trade trade) {
+    public ResponseEntity<Trade> createTrade(@PathVariable("id") Long stockId,
+                                             @RequestBody Trade trade) {
         Stock stock = stockService.findStockById(stockId);
-        Trade savedTrade = tradeService.save(stock, trade);
+        Account account = accountService.findAccountById(stock.getAccount().getId());
+        Trade savedTrade = tradeService.save(account.getId(), stock.getId(), trade);
         return ResponseEntity.ok(savedTrade);
     }
+
 
     @PostMapping("/{id}/createDividend")
     public ResponseEntity<Dividend> createDividend(@PathVariable("id") Long stockId, @RequestBody Dividend dividend) {

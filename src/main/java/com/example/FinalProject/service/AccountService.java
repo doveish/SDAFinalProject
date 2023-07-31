@@ -80,7 +80,8 @@ public class AccountService {
         }
         transaction.setAmount(transaction.getAmount());
         transaction.setTransactionDate(LocalDate.now());
-        transaction.setAccount(account);
+        transaction.setAccount(account);//
+        account.setId(id);
         transactionRepository.save(transaction);
         return account;
     }
