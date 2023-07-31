@@ -4,6 +4,7 @@ import com.example.FinalProject.model.enums.TradeType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -14,13 +15,12 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Trade {
+public class Trade implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private TradeType tradeType;
+    private String tradeType;
     @ManyToOne
-    @JoinColumn(name = "stock_stock_id")
     private Stock stock;
     private LocalDate date;
     private BigDecimal amount;
@@ -28,4 +28,15 @@ public class Trade {
     private BigDecimal commission;
     private BigDecimal tradeSum;
     private String comment;
+
+    public Trade(String tradeType, Stock stock, LocalDate date, BigDecimal amount, BigDecimal unitPrice, BigDecimal commission, BigDecimal tradeSum, String comment) {
+        this.tradeType = tradeType;
+        this.stock = stock;
+        this.date = date;
+        this.amount = amount;
+        this.unitPrice = unitPrice;
+        this.commission = commission;
+        this.tradeSum = tradeSum;
+        this.comment = comment;
+    }
 }
