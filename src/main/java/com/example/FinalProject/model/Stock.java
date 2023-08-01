@@ -2,6 +2,7 @@ package com.example.FinalProject.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 @Entity
+@DynamicInsert//
 public class Stock implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,10 +24,11 @@ public class Stock implements Serializable {
     @ManyToOne
     private Account account;
     private BigDecimal currentPrice;
-    private BigDecimal totalAmount;
-    private BigDecimal averagePrice;
-    private BigDecimal currentValue;
-    private BigDecimal profitLoss;
+    //    private BigDecimal totalAmount;
+    private BigDecimal totalAmount = BigDecimal.ZERO;
+    private BigDecimal averagePrice = BigDecimal.ZERO;
+    private BigDecimal currentValue = BigDecimal.ZERO;
+    private BigDecimal profitLoss = BigDecimal.ZERO;
 
     public Stock(String symbol, String stockName, Account account, BigDecimal currentPrice, BigDecimal totalAmount, BigDecimal averagePrice, BigDecimal currentValue, BigDecimal profitLoss) {
         this.symbol = symbol;

@@ -21,9 +21,9 @@ public class Dividend implements Serializable {
     private LocalDate date;
     @ManyToOne
     private Stock stock;
-    private BigDecimal grossAmount;
-    private BigDecimal withholdingTax;
-    private BigDecimal netAmount;
+    private BigDecimal grossAmount = BigDecimal.ZERO;
+    private BigDecimal withholdingTax = BigDecimal.ZERO;
+    private BigDecimal netAmount = BigDecimal.ZERO;
 
     public Dividend(LocalDate date, Stock stock, Account account, BigDecimal grossAmount, BigDecimal withholdingTax, BigDecimal netAmount) {
         this.date = date;

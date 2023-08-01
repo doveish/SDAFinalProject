@@ -19,7 +19,7 @@ public class Transaction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private BigDecimal amount;
+    private BigDecimal amount = BigDecimal.ZERO;
     private String transactionType;
     @ManyToOne
     private Account account;

@@ -21,7 +21,7 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String accountName;
-    private BigDecimal balance;
+    private BigDecimal balance = BigDecimal.ZERO;
     private String currency;
     private Boolean status;
 

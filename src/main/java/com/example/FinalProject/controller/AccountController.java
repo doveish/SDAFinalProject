@@ -63,11 +63,6 @@ public class AccountController {
         return ResponseEntity.accepted().body(accountService.updateAccountStatus(id));
     }
 
-    @PatchMapping("/{id}/balance-update-by-dividend")
-    public ResponseEntity<Account> updateAccountBalanceByReceivedDividend(@PathVariable("id") Long id,
-                                                                          @RequestBody Dividend dividend) {
-        return ResponseEntity.accepted().body(accountService.updateAccountBalanceByReceivedDividend(id, dividend));
-    }
 
     @PostMapping("/{id}/balance-update-by-transaction")
     public ResponseEntity<Account> updateAccountBalanceByTransactionType(@PathVariable("id") Long id,

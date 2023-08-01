@@ -23,10 +23,10 @@ public class Trade implements Serializable {
     @ManyToOne
     private Stock stock;
     private LocalDate date;
-    private BigDecimal amount;
-    private BigDecimal unitPrice;
-    private BigDecimal commission;
-    private BigDecimal tradeSum;
+    private BigDecimal amount = BigDecimal.ZERO;
+    private BigDecimal unitPrice = BigDecimal.ZERO;
+    private BigDecimal commission = BigDecimal.ZERO;
+    private BigDecimal tradeSum = BigDecimal.ZERO;
     private String comment;
 
     public Trade(String tradeType, Stock stock, LocalDate date, BigDecimal amount, BigDecimal unitPrice, BigDecimal commission, BigDecimal tradeSum, String comment) {

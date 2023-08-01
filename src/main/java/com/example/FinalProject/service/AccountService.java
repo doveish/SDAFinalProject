@@ -55,14 +55,6 @@ public class AccountService {
         return account;
     }
 
-    public Account updateAccountBalanceByReceivedDividend(Long id, Dividend dividend) {
-        Account account = accountRepository.findById(id).orElse(null);
-        BigDecimal total;
-        total = account.getBalance().add(dividend.getNetAmount());
-        account.setBalance(total);
-        return accountRepository.save(account);
-    }
-
     public Account updateAccountBalanceByTransactionType(Long id, Transaction transaction) {
         Account account = accountRepository.findById(id).orElse(null);
         BigDecimal total;

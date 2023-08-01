@@ -42,6 +42,7 @@ public class TradeService {
 
     public Trade save(Stock stock, Trade trade) {
         trade.setStock(stock);
+        updateStockBalanceByTradeType(stock.getAccount().getId(), stock.getId(), trade);
         return tradeRepository.save(trade);
     }
 
@@ -77,12 +78,17 @@ public class TradeService {
         if (trade.getTradeType().equalsIgnoreCase("BUY")) {
             totalStockAmount = trade.getAmount().add(stock.getTotalAmount());
             account.setBalance(account.getBalance().subtract(trade.getAmount().multiply(trade.getUnitPrice()).add(trade.getCommission())));
+            trade.setTradeSum(trade.getAmount().multiply(trade.getUnitPrice()).add(trade.getCommission()));
+            stock.setCurrentValue(stock.getCurrentValue());
+            stock.setCurrentValue(stock.getCurrentValue().add(trade.getAmount().multiply(trade.getUnitPrice()).add(trade.getCommission())));
         } else {
             if (trade.getTradeType().equalsIgnoreCase("SELL") && trade.getAmount().compareTo(stock.getTotalAmount()) > 0) {
                 throw new IllegalStateException("Quantity of transaction exceeds available stock amount");
             }
             totalStockAmount = stock.getTotalAmount().subtract(trade.getAmount());
             account.setBalance(account.getBalance().add(trade.getAmount().multiply(trade.getUnitPrice()).subtract(trade.getCommission())));
+            trade.setTradeSum(trade.getAmount().multiply(trade.getUnitPrice()).subtract(trade.getCommission()));
+            stock.setCurrentValue(stock.getCurrentValue().subtract(trade.getAmount().multiply(trade.getUnitPrice()).subtract(trade.getCommission())));
         }
 
         Trade newTrade = new Trade();
@@ -93,47 +99,15 @@ public class TradeService {
         newTrade.setUnitPrice(trade.getUnitPrice());
         newTrade.setCommission(trade.getCommission());
         newTrade.setComment(trade.getComment());
-        newTrade.setTradeSum(trade.getTradeSum());
+        newTrade.setTradeSum(trade.getTradeSum());//
 
         stock.setTotalAmount(totalStockAmount);
         stock.setAccount(account);
+        stock.setId(stockId);
         stock.setCurrentPrice(trade.getUnitPrice());//
-        stock.setCurrentValue(totalStockAmount.multiply(trade.getUnitPrice()));//UnitPrice should come from an external API
 
         return trade;
     }
-
-//    public Trade updateStockBalanceByTradeType(Long accountId, String stockSymbol, Trade trade) {
-//        Account account = accountRepository.findById(accountId).orElse(null);
-//        Stock stock = stockRepository.findById(stockId).orElseThrow();
-//        BigDecimal totalStockAmount;
-//
-//        if (trade.getTradeType().equalsIgnoreCase("BUY")) {
-//            totalStockAmount = trade.getAmount().add(stock.getTotalAmount());
-//        } else {
-//            if (trade.getTradeType().equalsIgnoreCase("SELL") && trade.getAmount().compareTo(stock.getTotalAmount()) > 0) {
-//                throw new IllegalStateException("Quantity of transaction exceeds available stock amount");
-//            }
-//            totalStockAmount = stock.getTotalAmount().subtract(trade.getAmount());
-//        }
-//
-//        Trade newTrade = new Trade();
-//        newTrade.setTradeType(trade.getTradeType());
-//        newTrade.setAmount(trade.getAmount());
-//        newTrade.setStock(stock);
-//        newTrade.setDate(LocalDate.now());
-//        newTrade.setUnitPrice(trade.getUnitPrice());
-//        newTrade.setCommission(trade.getCommission());
-//        newTrade.setComment(trade.getComment());
-//        newTrade.setTradeSum(trade.getTradeSum());
-//
-//        stock.setTotalAmount(totalStockAmount);
-//        stock.setAccount(account);
-//        stock.setCurrentPrice(trade.getUnitPrice());//
-//        stock.setCurrentValue(totalStockAmount.multiply(trade.getUnitPrice()));//UnitPrice should come from an external API
-//
-//        return trade;
-//    }
 
     public List<Trade> getTradeListByStockId(Long id) {
         return tradeRepository.findAllByStockId(id);
