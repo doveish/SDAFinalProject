@@ -22,7 +22,7 @@ please welcome our Stock API!
 ![tables](https://github.com/doveish/PracticalProject/assets/125504453/df913351-9ea0-49c1-b33b-f9efda8d5bd2)
 
 # Project flowchart
-![Flowchart](https://github.com/doveish/SDAFinalProject/blob/f37e4a2556cb664ecd9c71f55052ed6a57f79c49/Images/Flowchart.png)
+![Flowchart](https://github.com/doveish/SDAFinalProject/blob/a99e7c85ce5033cfe7f298769536a3a3dbae100e/Images/Flowchart.png)
 
 # Required software and TO-DO
 In order to run the application You need to have the following software installed:
