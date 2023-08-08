@@ -33,7 +33,7 @@ In order to run the application You need to have the following software installe
 * Please get the project files from "master" branch of this repository.
 
 # Authors
-The project was developed by @corvert(https://github.com/corvert) @doveish(https://github.com/doveish).
+The project was developed by @corvert(https://github.com/corvert) @doveish(https://github.com/doveish) @timomer83(https://github.com/timomer83).
 
 # Found a bug or want to add a feature
 <p align="justify"> 
