@@ -11,7 +11,7 @@ To fulfill the given conditions we chose a stock, transaction, dividend and acco
 allows the user to save the data to a database for future review. We also decided to add several calculation 
 methods to simplify the handling of transactions, profit/loss, total portfolio value etc. Our application allows the user to read and write 
 stockmarket related portfolio processes via browser in our test case. So without further delay,
-please welcome PORTFOL_IO!
+please welcome our Stock API!
 </p>
 
 # Portfol_IO
@@ -27,9 +27,10 @@ please welcome PORTFOL_IO!
 # Required software and TO-DO
 In order to run the application You need to have the following software installed:
 * Java Development Kit - during development we used JDK version 19 or higher.
-* IntelliJ Idea - change the Hibernate Connection Settings(Driver, URL, Username and Password) in Resources folder file hibernate.cfg.xml
+* IntelliJ Idea - change the database URL, username and password in the IntelliJ project(Driver, URL, Username and Password) in Resources folder Application Properties.
+* Angular - TODO!
 * MySQL - create and populate the Database with the given Queries in the SQL file of this repository. 
-* Please get the project files from "main" branch of this repository.
+* Please get the project files from "master" branch of this repository.
 
 # Authors
 The project was developed by @corvert(https://github.com/corvert) @doveish(https://github.com/doveish).
