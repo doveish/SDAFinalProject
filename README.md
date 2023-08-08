@@ -19,7 +19,7 @@ please welcome our Stock API!
 ![Front](https://github.com/doveish/SDAFinalProject/blob/4afb8f2065f77fb1c4c68c1b1afd6d31ad75f359/Images/Front.png)
 
 # MySQL Database structure
-![tables](https://github.com/doveish/PracticalProject/assets/125504453/df913351-9ea0-49c1-b33b-f9efda8d5bd2)
+![Database](https://github.com/doveish/SDAFinalProject/blob/b219dacc645fe7b9615fded84e38835106b654df/Images/Database.png)
 
 # Project flowchart
 ![Flowchart](https://github.com/doveish/SDAFinalProject/blob/a99e7c85ce5033cfe7f298769536a3a3dbae100e/Images/Flowchart.png)
