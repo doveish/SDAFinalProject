@@ -3,20 +3,16 @@ package com.example.FinalProject.service;
 import com.example.FinalProject.model.Account;
 import com.example.FinalProject.model.Stock;
 import com.example.FinalProject.model.Trade;
-import com.example.FinalProject.model.Transaction;
-import com.example.FinalProject.model.enums.TradeType;
 import com.example.FinalProject.repository.AccountRepository;
 import com.example.FinalProject.repository.StockRepository;
 import com.example.FinalProject.repository.TradeRepository;
-import jakarta.persistence.ManyToOne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class TradeService {
@@ -70,25 +66,30 @@ public class TradeService {
         return tradeList;
     }
 
-    public Trade updateStockBalanceByTradeType(Long accountId, Long stockId, Trade trade) {
+    private Trade updateStockBalanceByTradeType(Long accountId, Long stockId, Trade trade) {
         Account account = accountRepository.findById(accountId).orElse(null);
         Stock stock = stockRepository.findById(stockId).orElseThrow();
         BigDecimal totalStockAmount;
 
         if (trade.getTradeType().equalsIgnoreCase("BUY")) {
             totalStockAmount = trade.getAmount().add(stock.getTotalAmount());
-            account.setBalance(account.getBalance().subtract(trade.getAmount().multiply(trade.getUnitPrice()).add(trade.getCommission())));
+            account.setBalance(account.getBalance().subtract(trade.getAmount().multiply(trade.getUnitPrice())
+                    .add(trade.getCommission())));
             trade.setTradeSum(trade.getAmount().multiply(trade.getUnitPrice()).add(trade.getCommission()));
-            stock.setCurrentValue(stock.getCurrentValue());
-            stock.setCurrentValue(stock.getCurrentValue().add(trade.getAmount().multiply(trade.getUnitPrice()).add(trade.getCommission())));
+            stock.setTotalBuyValue(stock.getTotalBuyValue());
+            stock.setTotalBuyValue(stock.getTotalBuyValue().add(trade.getAmount().multiply(trade.getUnitPrice())
+                    .add(trade.getCommission())));
         } else {
-            if (trade.getTradeType().equalsIgnoreCase("SELL") && trade.getAmount().compareTo(stock.getTotalAmount()) > 0) {
+            if (trade.getTradeType().equalsIgnoreCase("SELL") && trade.getAmount()
+                    .compareTo(stock.getTotalAmount()) > 0) {
                 throw new IllegalStateException("Quantity of transaction exceeds available stock amount");
             }
             totalStockAmount = stock.getTotalAmount().subtract(trade.getAmount());
-            account.setBalance(account.getBalance().add(trade.getAmount().multiply(trade.getUnitPrice()).subtract(trade.getCommission())));
+            account.setBalance(account.getBalance().add(trade.getAmount().multiply(trade.getUnitPrice())
+                    .subtract(trade.getCommission())));
             trade.setTradeSum(trade.getAmount().multiply(trade.getUnitPrice()).subtract(trade.getCommission()));
-            stock.setCurrentValue(stock.getCurrentValue().subtract(trade.getAmount().multiply(trade.getUnitPrice()).subtract(trade.getCommission())));
+            stock.setTotalBuyValue(stock.getTotalBuyValue().subtract(trade.getAmount().multiply(trade.getUnitPrice())
+                    .subtract(trade.getCommission())));
         }
 
         Trade newTrade = new Trade();
@@ -105,6 +106,13 @@ public class TradeService {
         stock.setAccount(account);
         stock.setId(stockId);
         stock.setCurrentPrice(trade.getUnitPrice());//
+        stock.setProfitLoss(stock.getCurrentPrice().multiply(stock.getTotalAmount()).subtract(stock.getTotalBuyValue()));
+        if (totalStockAmount.compareTo(BigDecimal.ZERO) == 0) {
+            stock.setAveragePrice(BigDecimal.ZERO);
+        } else if (!stock.getTotalAmount().equals(BigDecimal.ZERO)) {
+            stock.setAveragePrice(stock.getTotalBuyValue().divide(stock.getTotalAmount(), 2, RoundingMode.HALF_UP));
+        }
+        stock.setTotalMarketValue(stock.getCurrentPrice().multiply(stock.getTotalAmount()));
 
         return trade;
     }

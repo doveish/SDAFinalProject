@@ -1,9 +1,10 @@
 package com.example.FinalProject.model;
 
-import jakarta.persistence.*;
+
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -14,7 +15,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 @Entity
-@DynamicInsert//
+@DynamicInsert
 public class Stock implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,20 +25,23 @@ public class Stock implements Serializable {
     @ManyToOne
     private Account account;
     private BigDecimal currentPrice;
-    //    private BigDecimal totalAmount;
     private BigDecimal totalAmount = BigDecimal.ZERO;
     private BigDecimal averagePrice = BigDecimal.ZERO;
-    private BigDecimal currentValue = BigDecimal.ZERO;
+    private BigDecimal totalBuyValue = BigDecimal.ZERO;
     private BigDecimal profitLoss = BigDecimal.ZERO;
+    private BigDecimal totalMarketValue = BigDecimal.ZERO;
+    private BigDecimal totalAmountInEur = BigDecimal.ZERO;
 
-    public Stock(String symbol, String stockName, Account account, BigDecimal currentPrice, BigDecimal totalAmount, BigDecimal averagePrice, BigDecimal currentValue, BigDecimal profitLoss) {
+    public Stock(String symbol, String stockName, Account account, BigDecimal currentPrice, BigDecimal totalAmount, BigDecimal averagePrice, BigDecimal totalBuyValue, BigDecimal profitLoss, BigDecimal totalMarketValue, BigDecimal totalAmountInEur) {
         this.symbol = symbol;
         this.stockName = stockName;
         this.account = account;
         this.currentPrice = currentPrice;
         this.totalAmount = totalAmount;
         this.averagePrice = averagePrice;
-        this.currentValue = currentValue;
+        this.totalBuyValue = totalBuyValue;
         this.profitLoss = profitLoss;
+        this.totalMarketValue = totalMarketValue;
+        this.totalAmountInEur = totalAmountInEur;
     }
 }

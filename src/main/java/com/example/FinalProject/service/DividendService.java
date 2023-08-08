@@ -56,6 +56,7 @@ public class DividendService {
         BigDecimal net = dividend.getGrossAmount().subtract(dividend.getWithholdingTax());
         total = account.getBalance().add(dividend.getGrossAmount().subtract(dividend.getWithholdingTax()));
         dividend.setNetAmount(dividend.getGrossAmount().subtract(dividend.getWithholdingTax()));
+        dividend.getStock().setTotalBuyValue(dividend.getStock().getTotalBuyValue().subtract(dividend.getNetAmount()));
         account.setBalance(total);
         return accountRepository.save(account);
     }

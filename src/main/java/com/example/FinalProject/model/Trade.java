@@ -1,9 +1,9 @@
 package com.example.FinalProject.model;
 
-import com.example.FinalProject.model.enums.TradeType;
-import jakarta.persistence.*;
+
 import lombok.*;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;

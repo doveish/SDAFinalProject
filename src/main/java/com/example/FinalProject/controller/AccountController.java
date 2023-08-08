@@ -6,6 +6,7 @@ import com.example.FinalProject.service.StockService;
 import com.example.FinalProject.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -68,5 +69,13 @@ public class AccountController {
     public ResponseEntity<Account> updateAccountBalanceByTransactionType(@PathVariable("id") Long id,
                                                                          @RequestBody Transaction transaction) {
         return ResponseEntity.accepted().body(accountService.updateAccountBalanceByTransactionType(id, transaction));
+    }
+
+
+    @GetMapping("/")
+    public String getCustomers(final ModelMap modelMap) {
+        List<Account> customerList = accountService.getAllAccounts();
+        modelMap.addAttribute("customerDtoList", customerList);
+        return "index";
     }
 }

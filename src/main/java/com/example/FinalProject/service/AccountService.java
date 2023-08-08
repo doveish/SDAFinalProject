@@ -4,6 +4,7 @@ import com.example.FinalProject.model.*;
 import com.example.FinalProject.model.enums.TradeType;
 import com.example.FinalProject.model.enums.TransactionType;
 import com.example.FinalProject.repository.AccountRepository;
+import com.example.FinalProject.repository.CurrencyRateRepository;
 import com.example.FinalProject.repository.StockRepository;
 import com.example.FinalProject.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,10 @@ public class AccountService {
     @Autowired
     private StockRepository stockRepository;
 
+    private CurrencyRate currencyRate;
+    @Autowired
+    private CurrencyRateRepository currencyRateRepository;
+
     public List<Account> getAllAccounts() {
         return accountRepository.findAll();
     }
@@ -32,6 +37,7 @@ public class AccountService {
     }
 
     public Account save(Account account) {
+
         Account savedAccount = toAccount(account);
         return accountRepository.save(savedAccount);
     }
@@ -56,12 +62,16 @@ public class AccountService {
     }
 
     public Account updateAccountBalanceByTransactionType(Long id, Transaction transaction) {
+
         Account account = accountRepository.findById(id).orElse(null);
         BigDecimal total;
         if (transaction.getTransactionType().equalsIgnoreCase("DEPOSIT")) {
             total = account.getBalance().add(transaction.getAmount());
             account.setBalance(total);
             transaction.setTransactionType("DEPOSIT");
+
+
+
         } else {
             if (transaction.getAmount().compareTo(account.getBalance()) > 0) {
                 throw new IllegalStateException("Withdrawal amount exceeds account balance");

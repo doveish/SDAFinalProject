@@ -2,14 +2,12 @@ package com.example.FinalProject.service;
 
 import com.example.FinalProject.model.Account;
 import com.example.FinalProject.model.Stock;
-import com.example.FinalProject.model.Trade;
 import com.example.FinalProject.repository.StockRepository;
 import com.example.FinalProject.repository.TradeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 @Service
@@ -51,7 +49,7 @@ public class StockService {
                 .currentPrice(stock.getCurrentPrice())
                 .totalAmount(stock.getTotalAmount())
                 .averagePrice(stock.getAveragePrice())
-                .currentValue(stock.getCurrentValue())
+                .totalBuyValue(stock.getTotalBuyValue())
                 .profitLoss(stock.getProfitLoss())
                 .build();
     }
@@ -62,27 +60,13 @@ public class StockService {
     }
 
     public List<Stock> getStocksListByAccountId(Long id) {
+//        BigDecimal totalProfitLoss = stockRepository.findAllByAccountId(id)
+//                .stream()
+//                .map(Stock::getProfitLoss)
+//                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
         return stockRepository.findAllByAccountId(id);
     }
-
-    //WILL BE CALCULATED IN FRONT-END!
-
-//    public Stock getAveragePriceForStockBySymbol(String symbol) {
-//        Stock stock = stockRepository.findStockBySymbol(symbol);
-//        List<Trade> tradeList = tradeRepository.findTradeByStockSymbol(symbol);
-//
-//        BigDecimal totalTradeSum = BigDecimal.ZERO;
-//
-//        for (Trade trade : tradeList) {
-//            BigDecimal tradeSum = trade.getTradeSum();
-//            totalTradeSum = totalTradeSum.add(tradeSum);
-//        }
-//
-//        BigDecimal totalAmount = stock.getTotalAmount();
-//        BigDecimal averageBuyPrice = totalTradeSum.divide(totalAmount, 2, RoundingMode.HALF_UP);
-//        stock.setAveragePrice(averageBuyPrice);
-//        return stock;
-//    }
 
 
 }
