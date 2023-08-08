@@ -9,8 +9,8 @@ The requirements for this project were:
 <p align="justify"> 
 To fulfill the given conditions we chose a stock, transaction, dividend and account tracking application which 
 allows the user to save the data to a database for future review. We also decided to add several calculation 
-methods to simplify the tax handling of transactions etc. Our application allows the user to read and write 
-stockmarket related portfolio processes via IntelliJ console in our test case. So without further delay,
+methods to simplify the handling of transactions, profit/loss, total portfolio value etc. Our application allows the user to read and write 
+stockmarket related portfolio processes via browser in our test case. So without further delay,
 please welcome PORTFOL_IO!
 </p>
 
