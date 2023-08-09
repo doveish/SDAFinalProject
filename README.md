@@ -16,7 +16,7 @@ please welcome our Stock Portfolio Tracker!
 
 # STOCK PORTFOLIO TRACKER
 
-![Front](https://github.com/doveish/SDAFinalProject/blob/4afb8f2065f77fb1c4c68c1b1afd6d31ad75f359/Images/Front.png)
+![Front](https://github.com/doveish/SDAFinalProject/blob/6314f2213c1df1c425a3ebebe4833298ce9c871e/Images/Front.png)
 
 # MySQL Database structure
 ![Database](https://github.com/doveish/SDAFinalProject/blob/e0c51479b3d80d2fc26829bc704f2cd4e42bdd4b/Images/Database%20C.png)
