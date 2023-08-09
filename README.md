@@ -37,7 +37,7 @@ In order to run the application You need to have the following software installe
 
   
 
-  <p style="text-align: center;"><b>Please get the project files Front-End and Back-End from "master" branch of this repository.</b></p>
+  <p align="center"><b>Please get the project files Front-End and Back-End from "master" branch of this repository.</b></p>
 
 
 # Authors
