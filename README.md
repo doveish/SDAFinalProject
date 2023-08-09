@@ -35,7 +35,7 @@ In order to run the application You need to have the following software installe
 * **Angular** - go to the directory folder of the Front-End via VS Code console and run the project with "npm start" or "ng serve" command.
 * **Browser** - we used the URL "localhost/4200" for testing
 
-  <p align="center"><b>Please get the project files Front-End and Back-End from "master" branch of this repository.</b></p>
+  <p align="center"><b>Please get the project files Front-End in the "frontend" branch Back-End from "master" branch of this repository.</b></p>
 
 
 # Authors
