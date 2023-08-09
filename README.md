@@ -29,9 +29,12 @@ In order to run the application You need to have the following software installe
 * Java Development Kit - during development we used JDK version 19 or higher.
 * IntelliJ Idea - change the database URL, username and password in the IntelliJ project for Database connection in Resources folder Application Properties.
   Also add a new MyUser for login purpose in the FinalProjectApplication class with the appropriate field values.
-  Database - the databa
+* Database - Create the database Schema with the appropriate name and the Tables will be generated automatically.
+* Postman - Create a new User by making a HTTP PUT request to the URL("localhost:8080/signup")
+  with the following JSON ({"username":"your username here", "password":"your password here"}) 
 * Angular - TODO!
 * Please get the project files Front-End and Back-End from "master" branch of this repository.
+
 
 # Authors
 Developed by @corvert(https://github.com/corvert) @doveish(https://github.com/doveish) @timomer83(https://github.com/timomer83).
