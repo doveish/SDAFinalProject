@@ -1,0 +1,42 @@
+<div class="card mb-2">
+  <div class="card-body">
+    <div class="row clearfix">
+
+    </div>
+    <div>
+      <h5>Add transaction {{ selectedAccount.accountName }}</h5>
+      <form (submit)="onSubmit(addTransactionForm)" #addTransactionForm="ngForm">
+        <div class="form-group">
+          <div>
+            <label for="date">Date:</label><br>
+            <input class="form-control"  style="width: 200px" type="date" id="transactionDate" name="transactionDate" [(ngModel)]="transaction.transactionDate"
+              required max="{{ getCurrentDate() }}"> <br>
+          </div>
+          <div>
+            <label for="amount">Amount</label>
+            <br>
+            <input class="form-control" style="width: 200px" type="number" id="amount" name="amount"  value=100 [(ngModel)]="transaction.amount" required >
+            <br>
+          </div>
+          <div>
+            <label for="transactionType">Trade Type</label> <br>
+            <select col-4 class="form-select" style="width: 200px" aria-label="Default select example" id="transactionType"
+              name="transactionType" [(ngModel)]="transaction.transactionType" required>
+              <!-- <option selected>Trade Type</option> -->
+              <option value="DEPOSIT">DEPOSIT</option>
+              <option value="WITHDRAW">WITHDRAW</option>
+            </select>
+          </div>
+
+          <div *ngIf="transaction.transactionType === 'WITHDRAW' && transaction.amount > selectedAccount.balance" class="alert alert-danger mt-2">
+            Withdrawal amount exceeds account balance!
+          </div>
+
+          <br>
+          <button [disabled]="addTransactionForm.invalid || (transaction.transactionType === 'WITHDRAW' && transaction.amount > selectedAccount.balance)" 
+            class="btn btn-success" type="submit">Add transaction</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

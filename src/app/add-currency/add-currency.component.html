@@ -1,0 +1,28 @@
+  <div class="card mb-2">
+      <div class="card-body">
+        <div class="row clearfix">
+        </div>
+        <div>
+          <h5>
+            {{ isUpdateMode ? 'Update Currency Rate' : 'Add new currency rate' }}
+          </h5>
+          <form (submit)="onSubmit(addCurrencyRateForm)" #addCurrencyRateForm="ngForm">
+            <div class="form-group">
+                <label for="currency">Currency</label> <br>
+                <input class="form-control" style="width: 200px" type="text" id="currency" name="currency" [(ngModel)]="currencyRate.currency" required
+                [disabled]="isUpdateMode">
+                <br>
+              </div>
+              <div>
+                <label for="rate">Currency rate</label>
+                <br>
+                <input  class="form-control" style="width: 200px" type="number" id="rate" name="rate" [(ngModel)]="currencyRate.rate" required>
+                <br>
+              </div>
+              <button [disabled]="addCurrencyRateForm.invalid" class="btn btn-success" style="width: 200px" type="submit">
+                {{ isUpdateMode ? 'Update currency' : 'Add new currency' }}
+              </button>
+          </form>
+        </div>
+      </div>
+    </div>

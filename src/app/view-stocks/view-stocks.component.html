@@ -1,0 +1,71 @@
+<div class="card mb-2">
+  <div class=" col-12 card-body">
+    <div class="row clearfix">
+      <div class="col-10">
+        <h5 class="card-title">View stock list <span *ngIf="showAccountName()"> of account: {{ selectedAccount.accountName }}</span> </h5>
+      </div>
+      <div class="col-2" >
+        <a *ngIf="showAddStockButton()"><img (click)="goToAddTrade(selectedAccount.id)" src="https://img.icons8.com/?size=32&id=102544&format=png"
+            title="Add new stock to account"></a>
+      </div>
+    </div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert"  *ngIf="noStockAlert">
+      No stock on this account!
+    </div>
+  
+    <table class="table">  
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col" style="text-align: left">Stock symbol</th>
+          <th scope="col" style="text-align: left">Stock name</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Aveg unit/price</th>
+          <th scope="col">Market price</th>
+          <th scope="col">Profit</th>
+          <th scope="col">Market value</th>
+          <th scope="col" *ngIf="showAccount()">Account</th>
+          <!-- <th scope="col">View trades</th> -->
+          <th scope="col">Add trade</th>
+          <th scope="col">View dididends</th>
+          <th scope="col">Add dividend</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stock of stocks ">
+          <td scope="row" style="text-align: left"><a class="nav-link" style="color: rgb(93, 82, 215);"
+              (click)="goToStockTradeList(stock.id)" title="View stock trade list">{{stock.symbol}}</a></td>
+          <td scope="row" style="text-align: left">{{stock.stockName }}</td>
+          <td scope="row">{{stock.totalAmount | number: '1.2-2' }}</td>
+          <td scope="row">{{stock.averagePrice | number: '1.2-2' }}</td>
+          <td scope="row">{{stock.currentPrice | number: '1.2-2' }}</td>
+          <td scope="row">{{stock.profitLoss | number: '1.2-2' }}</td>
+          <td scope="row">{{stock.totalMarketValue | number: '1.2-2' }}</td>
+          <td scope="row" style="text-align: left" *ngIf="showAccount()">{{stock.account.accountName }}</td>
+          <!-- <td scope="row" style="text-align: center"><img (click)="goToStockTradeList(stock.id)"
+                  src="https://img.icons8.com/?size=28&id=4B2A3cBv2Z0r&format=png"></td> -->
+          <td style="text-align: center" scope="row"><img (click)="goToAddTrade(stock.id)"
+              src="https://img.icons8.com/?size=32&id=102544&format=png" title="Add trade to stock"></td>
+          <td scope="row" style="text-align: center"><img (click)="goToStockDividendList(stock.id)"
+              src="https://img.icons8.com/?size=28&id=4B2A3cBv2Z0r&format=png" title="View received dividends"></td>
+          <td style="text-align: center" scope="row"><img (click)="goToAddDividend(stock.id)"
+              src="https://img.icons8.com/?size=32&id=102544&format=png" title="Add new received dividend"></td>
+
+        </tr>
+        <tr>
+          <td scope="row" style="text-align: left">Total sum</td>
+          <td scpoe="row"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td scpoe="row" style="font-weight:bold; color: black;">{{ getProfitSum(0) | number: '1.2-2' }} </td>
+          <td scpoe="row" style="font-weight:bold; color: black;">{{ getMarketValueSum(0) | number: '1.2-2'}} </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

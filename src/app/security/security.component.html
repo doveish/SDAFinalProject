@@ -1,0 +1,25 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+
+<form (ngSubmit)="login()">
+  <h3>Login</h3>
+    <label for="username" class="fadeIn second">Username:</label>
+    <input type="text" id="username" name="username"  class="fadeIn third" placeholder="username" [(ngModel)]="authRequest.username">
+  
+    <label for="password" class="fadeIn fourth">Password:</label>
+    <input type="password" id="password" name="password" class="fadeIn fifth" placeholder="password" [(ngModel)]="authRequest.password">
+    <br>
+    <!-- <button class="fadeIn fourth" type="submit">Login</button> -->
+    <input type="submit"  class="fadeIn sixth" value="Log In">
+    <div class="alert alert-danger" role="alert" *ngIf="invalidLogin">Login failed: {{ errorMessage }} </div>
+  </form>
+
+  
+  <div class="alert alert-success" *ngIf="loginSuccess">
+    Logged in as {{ username }}.
+  </div>
+  
+  
+  
+</div>
+</div>

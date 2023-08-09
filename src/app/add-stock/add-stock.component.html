@@ -1,0 +1,31 @@
+<div class="card mb-2">
+  <div class="card-body">
+    <div class="row clearfix">
+
+    </div>
+    <div>
+      <h5>Add Stock for Account {{ selectedAccount.accountName }}</h5>
+      <form (submit)="onSubmit(addStockForm)" #addStockForm="ngForm">
+        <div class="form-group">
+          <div>
+            <label for="symbol">Stock Symbol:</label><br>
+            <input class="form-control" style="width: 200px" type="text" id="symbol" name="symbol" [(ngModel)]="newStock.symbol" required> <br>
+          </div>
+          <div>
+            <label for="stockName">Stock Name:</label> <br>
+            <input class="form-control" style="width: 200px" type="text" id="stockName" name="stockName" [(ngModel)]="newStock.stockName" required>
+            <br>
+          </div>
+          <div>
+            <label for="currentPrice">Current Price:</label>
+            <br>
+            <input class="form-control" style="width: 200px" type="number" id="currentPrice" name="currentPrice" [(ngModel)]="newStock.currentPrice" required>
+          </div>
+          <br>
+          
+          <button [disabled]="addStockForm.invalid" class="btn btn-success" style="width: 200px" type="submit">Add stock</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

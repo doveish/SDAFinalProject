@@ -1,0 +1,27 @@
+<div class="card mb-2 col-12">
+    <div class="card-body">
+      <div class="row clearfix">
+        <div class="col-12">
+          <div>
+            <h5 class="card-title">View transaction list
+              {{ selectedAccount.accountName }}
+            </h5>
+          </div>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Type</th>
+                <th scope="col">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let transaction of transactions">
+                <td scope="row">{{transaction.transactionDate | date:'mediumDate' }}</td>
+                <td scope="row">{{transaction.transactionType }}</td>
+                <td scope="row">{{transaction.amount | number: '1.2-2' }}</td>
+               
+            </tbody>
+          </table>
+        </div>
+      </div>
