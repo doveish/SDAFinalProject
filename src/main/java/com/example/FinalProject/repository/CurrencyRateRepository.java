@@ -8,6 +8,9 @@ import java.math.BigDecimal;
 
 @Repository
 public interface CurrencyRateRepository extends JpaRepository<CurrencyRate, Long> {
-    String findByCurrency(String currency);
+    CurrencyRate findByCurrency(String currency);
+
+
+    // CurrencyRate findByCurrency(String currency);
 
 }

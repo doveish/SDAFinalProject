@@ -4,7 +4,6 @@ import com.example.FinalProject.model.CurrencyRate;
 import com.example.FinalProject.service.CurrencyRateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -23,8 +22,14 @@ public class CurrencyRateController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CurrencyRate> getCurrencyRateById(@PathVariable("id") Long id) {
-        CurrencyRate currencyRate = currencyRateService.findCurrencyReteById(id);
+        CurrencyRate currencyRate = currencyRateService.findCurrencyRateById(id);
         return ResponseEntity.ok(currencyRate);
+    }
+
+        @GetMapping("currency/{code}")
+    public ResponseEntity<CurrencyRate> getCurrencyRateByCurrency(@PathVariable("code") String code) {
+        CurrencyRate currencyRateByCurrency = currencyRateService.findCurrencyRateByCurrency(code);
+        return ResponseEntity.ok(currencyRateByCurrency);
     }
 
     @PostMapping("/add-currency")
@@ -39,4 +44,6 @@ public class CurrencyRateController {
         CurrencyRate updateCurrencyRate = currencyRateService.updateCurrencyRate(currencyRate);
         return ResponseEntity.ok(updateCurrencyRate);
     }
+
+
 }

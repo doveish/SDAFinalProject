@@ -24,7 +24,7 @@ public class AccountService {
     @Autowired
     private StockRepository stockRepository;
 
-    private CurrencyRate currencyRate;
+
     @Autowired
     private CurrencyRateRepository currencyRateRepository;
 
@@ -51,6 +51,8 @@ public class AccountService {
                 .status(account.getStatus())
                 .build();
     }
+
+
 
     public Account updateAccountStatus(Long id) {
         Account account = accountRepository.findById(id).orElse(null);

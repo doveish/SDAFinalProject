@@ -1,6 +1,5 @@
 package com.example.FinalProject.service;
 
-import com.example.FinalProject.model.Account;
 import com.example.FinalProject.model.CurrencyRate;
 import com.example.FinalProject.repository.CurrencyRateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,11 @@ public class CurrencyRateService {
         return currencyRateRepository.save(currencyRate);
     }
 
-    public CurrencyRate findCurrencyReteById(Long id) {
+    public CurrencyRate findCurrencyRateById(Long id) {
         return currencyRateRepository.findById(id).orElseThrow();
+    }
+
+    public CurrencyRate findCurrencyRateByCurrency(String currency) {
+        return currencyRateRepository.findByCurrency(currency);
     }
 }
