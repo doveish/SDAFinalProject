@@ -1,0 +1,63 @@
+<div class="card mb-2">
+  <div class="card-body">
+    <div class="row clearfix">
+
+    </div>
+    <div>
+      <h5>Add trade for stock {{ selectedStock.stockName }}</h5>
+      <form (submit)="onSubmit(addTradeForm)" #addTradeForm="ngForm">
+        <div class="form-group">
+          <div>
+            <label for="date">Date:</label><br>
+            <input class="form-control" style="width: 200px" type="date" id="date" name="date"
+              [(ngModel)]="newTrade.date" required max="{{ getCurrentDate() }}">
+          </div>
+          <div>
+            <label for="tradeType">Trade Type</label>
+            <select class="form-select" style="width: 200px" aria-label="Default select example" id="tradeType"
+              name="tradeType" [(ngModel)]="newTrade.tradeType" required>
+              <!-- <option selected>Trade Type</option> -->
+              <option value="BUY">BUY</option>
+              <option value="SELL">SELL</option>
+            </select>
+          </div>
+          <div>
+            <label for="amount">Amount</label>
+            <br>
+            <input class="form-control" style="width: 200px" type="number" id="amount" name="amount"
+              [(ngModel)]="newTrade.amount" required>
+
+          </div>
+          <div>
+            <label for="unitPrice">Price:</label>
+            <br>
+            <input class="form-control" style="width: 200px" type="number" id="unitPrice" name="unitPrice"
+              [(ngModel)]="newTrade.unitPrice" required>
+
+          </div>
+          <div>
+            <label for="commission">Commission:</label>
+            <br>
+            <input class="form-control" style="width: 200px" type="number" id="commission" name="commission"
+              [(ngModel)]="newTrade.commission" required>
+
+          </div>
+          <div>
+            <label for="comment">Comment:</label>
+            <br>
+            <input class="form-control" type="text" id="comment" name="comment" [(ngModel)]="newTrade.comment">
+            <br>
+          </div>
+
+          <div *ngIf="newTrade.tradeType === 'SELL' && newTrade.amount > selectedStock.totalAmount" class="alert alert-danger mt-2">
+            Trade amount exceeds stock amount You have!
+          </div>
+          
+          <button [disabled]="addTradeForm.invalid || (newTrade.tradeType === 'SELL' && newTrade.amount > selectedStock.totalAmount)"
+            class="btn btn-success" style="width: 200px" type="submit">Add new trade</button>
+          
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
