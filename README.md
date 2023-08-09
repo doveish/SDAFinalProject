@@ -27,10 +27,11 @@ please welcome our Stock API!
 # Required software and TO-DO
 In order to run the application You need to have the following software installed:
 * Java Development Kit - during development we used JDK version 19 or higher.
-* IntelliJ Idea - change the database URL, username and password in the IntelliJ project(Driver, URL, Username and Password) in Resources folder Application Properties.
+* IntelliJ Idea - change the database URL, username and password in the IntelliJ project for Database connection in Resources folder Application Properties.
+  Also add a new MyUser for login purpose in the FinalProjectApplication class with the appropriate field values.
+  Database - the databa
 * Angular - TODO!
-* MySQL - create and populate the Database with the given Queries in the SQL file of this repository. 
-* Please get the project files from "master" branch of this repository.
+* Please get the project files Front-End and Back-End from "master" branch of this repository.
 
 # Authors
 Developed by @corvert(https://github.com/corvert) @doveish(https://github.com/doveish) @timomer83(https://github.com/timomer83).
