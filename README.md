@@ -32,7 +32,8 @@ In order to run the application You need to have the following software installe
 * Database - Create the database Schema with the appropriate name and the Tables will be generated automatically.
 * Postman - Create a new User by making a HTTP PUT request to the URL("localhost:8080/signup")
   with the following JSON ({"username":"your username here", "password":"your password here"}) 
-* Angular - TODO!
+* Angular - go to the directory folder of the Front-End via VS Code console and run the project with "npm start" or "ng serve" command.
+* Browser - we used the URL "localhost/4200" for testing
 * Please get the project files Front-End and Back-End from "master" branch of this repository.
 
 
