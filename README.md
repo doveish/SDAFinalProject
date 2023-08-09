@@ -14,7 +14,7 @@ stockmarket related portfolio processes via browser in our test case. So without
 please welcome our Stock Portfolio Tracker!
 </p>
 
-# STOCK API
+# STOCK PORTFOLIO TRACKER
 
 ![Front](https://github.com/doveish/SDAFinalProject/blob/4afb8f2065f77fb1c4c68c1b1afd6d31ad75f359/Images/Front.png)
 
